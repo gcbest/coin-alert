@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from '../imports/ui/App.svelte';
 
 Meteor.startup(() => {

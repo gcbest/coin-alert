@@ -3,6 +3,7 @@
   import { Orders } from '../api/orders';
   import { LoginWindow, Logout } from 'meteor/levelup:svelte-accounts-ui';
   import Order from '../ui/orders/Order.svelte';
+  import { Button } from 'sveltestrap';
 
   let username = '';
   let amount = 0;
@@ -33,6 +34,8 @@
   {#each $orders as order}
     <Order {order} />
   {/each}
+
+  <Button color="primary">Hello world</Button>
 
   <form on:submit|preventDefault={handleSubmit}>
     <input type="text" name="username" bind:value={username} />
