@@ -3,7 +3,7 @@
   import { Orders } from '../api/orders';
   import UserOrders from '../ui/orders/UserOrders.svelte';
   import { LoginWindow, Logout } from 'meteor/levelup:svelte-accounts-ui';
-  import Order from './orders/OrderAlert.svelte';
+  import AlertOrders from './orders/AlertOrders.svelte';
   import { onMount } from 'svelte';
 
   let email = '';
@@ -12,20 +12,9 @@
 
   // when order added to database this will fetch all of them from DB
   $: user = useTracker(() => Meteor.user());
-  $: allOrders = useTracker(() => Orders.find().fetch());
+  // $: allOrders = useTracker(() => Orders.find().fetch());
 
   $: userId = useTracker(() => Meteor.userId());
-  let userId = $userId;
-  // TODO: USER ORDERS
-  // $: userOrders = useTracker(() => Orders.find().fetch());
-
-  // onMount(() => {
-  //   if ($user) {
-  //     email = $user.emails[0].address;
-  //     console.log(email);
-  //   }
-  // });
-
   function handleSubmit(event) {
     Orders.insert({
       email: $user.emails[0].address,
@@ -39,11 +28,12 @@
 </script>
 
 <style>
-  .alert-area {
-    width: 300px;
-    position: fixed;
-    bottom: 5%;
-    right: 10%;
+  h1 {
+    text-align: center;
+  }
+
+  .login-window {
+    color: green;
   }
 </style>
 
@@ -51,9 +41,11 @@
   {#if $userId}
     <Logout />
   {:else}
-    <LoginWindow />
+    <div class="login-window">
+      <LoginWindow />
+    </div>
   {/if}
-  <h1>Yerrr</h1>
+  <h1>Coin Counter</h1>
 
   <form on:submit|preventDefault={handleSubmit}>
     <input type="number" name="amount" bind:value={amount} />
@@ -63,10 +55,4 @@
 
 <UserOrders userId={$userId} />
 
-<div class="alert-area">
-  {#if $allOrders.length > 0}
-    {#each $allOrders as order}
-      <Order {order} />
-    {/each}
-  {/if}
-</div>
+<AlertOrders userId={$userId} />
