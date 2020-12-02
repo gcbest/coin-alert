@@ -3,26 +3,47 @@
   import { Orders } from '../api/orders';
   import { LoginWindow, Logout } from 'meteor/levelup:svelte-accounts-ui';
   import Order from '../ui/orders/Order.svelte';
-  import { Button } from 'sveltestrap';
+  import { onMount } from 'svelte';
 
-  let username = '';
+  let email = '';
   let amount = 0;
+  let userOrders = [];
 
   // when order added to database this will fetch all of them from DB
-  $: orders = useTracker(() => Orders.find().fetch());
   $: user = useTracker(() => Meteor.user());
+  $: allOrders = useTracker(() => Orders.find().fetch());
+  // $: userOrders = useTracker(() => Orders.find({email: }).fetch());
   $: userId = useTracker(() => Meteor.userId());
 
+  // onMount(() => {
+  //   if ($user) {
+  //     email = $user.emails[0].address;
+  //     console.log(email);
+  //   }
+  // });
+  function popAlert() {
+    const newAlert = new Alert();
+    document.querySelector('.popAlert').appendChild(newAlert);
+  }
+
   function handleSubmit(event) {
-    console.log($user);
     Orders.insert({
       email: $user.emails[0].address,
       amount,
     });
 
-    username = '';
+    popAlert();
   }
 </script>
+
+<style>
+  .alert-area {
+    width: 300px;
+    position: fixed;
+    bottom: 5%;
+    right: 10%;
+  }
+</style>
 
 <header>
   {#if $userId}
@@ -31,15 +52,17 @@
     <LoginWindow />
   {/if}
   <h1>Yerrr</h1>
-  {#each $orders as order}
-    <Order {order} />
-  {/each}
-
-  <Button color="primary">Hello world</Button>
 
   <form on:submit|preventDefault={handleSubmit}>
-    <input type="text" name="username" bind:value={username} />
     <input type="number" name="amount" bind:value={amount} />
     <button type="submit">Order</button>
   </form>
 </header>
+
+<div class="alert-area">
+  {#if $allOrders.length > 0}
+    {#each $allOrders as order}
+      <Order {order} />
+    {/each}
+  {/if}
+</div>

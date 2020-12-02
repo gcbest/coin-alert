@@ -1,13 +1,16 @@
 <script>
-  export let order;
+  import { Alert } from 'sveltestrap';
   import { Orders } from '../../api/orders';
+
+  export let order;
+  let visible;
   function deleteOrder() {
     Orders.remove(order._id);
   }
 </script>
 
-<li>
+<Alert color="info" isOpen={visible} toggle={() => (visible = false)}>
   {order.email}
   | ${order.amount}
-  <button on:click={deleteOrder}>Delete</button>
-</li>
+  <!-- <button on:click={deleteOrder}>Delete</button> -->
+</Alert>
