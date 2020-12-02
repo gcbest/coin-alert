@@ -1,8 +1,9 @@
 <script>
   import { useTracker } from 'meteor/rdb:svelte-meteor-data';
   import { Orders } from '../api/orders';
+  import UserOrders from '../ui/orders/UserOrders.svelte';
   import { LoginWindow, Logout } from 'meteor/levelup:svelte-accounts-ui';
-  import Order from '../ui/orders/Order.svelte';
+  import Order from './orders/OrderAlert.svelte';
   import { onMount } from 'svelte';
 
   let email = '';
@@ -12,8 +13,11 @@
   // when order added to database this will fetch all of them from DB
   $: user = useTracker(() => Meteor.user());
   $: allOrders = useTracker(() => Orders.find().fetch());
-  // $: userOrders = useTracker(() => Orders.find({email: }).fetch());
+
   $: userId = useTracker(() => Meteor.userId());
+  let userId = $userId;
+  // TODO: USER ORDERS
+  // $: userOrders = useTracker(() => Orders.find().fetch());
 
   // onMount(() => {
   //   if ($user) {
@@ -21,18 +25,16 @@
   //     console.log(email);
   //   }
   // });
-  function popAlert() {
-    const newAlert = new Alert();
-    document.querySelector('.popAlert').appendChild(newAlert);
-  }
 
   function handleSubmit(event) {
     Orders.insert({
       email: $user.emails[0].address,
+      userId: $userId,
       amount,
+      createdAt: new Date(),
     });
 
-    popAlert();
+    // popAlert();
   }
 </script>
 
@@ -58,6 +60,8 @@
     <button type="submit">Order</button>
   </form>
 </header>
+
+<UserOrders userId={$userId} />
 
 <div class="alert-area">
   {#if $allOrders.length > 0}

@@ -1,12 +1,12 @@
 <script>
   import { Alert } from 'sveltestrap';
-  import { Orders } from '../../api/orders';
+  // import { Orders } from '../../api/orders';
 
   export let order;
   let visible;
-  function deleteOrder() {
-    Orders.remove(order._id);
-  }
+  //   function deleteOrder() {
+  //     Orders.remove(order._id);
+  //   }
 </script>
 
 <Alert color="info" isOpen={visible} toggle={() => (visible = false)}>
