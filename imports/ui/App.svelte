@@ -1,4 +1,5 @@
 <script>
+  import { v4 as uuidv4 } from 'uuid';
   import { useTracker } from 'meteor/rdb:svelte-meteor-data';
   import { Orders } from '../api/orders';
   import UserOrders from '../ui/orders/UserOrders.svelte';
@@ -21,6 +22,7 @@
       userId: $userId,
       amount,
       createdAt: new Date(),
+      uuid: uuidv4(),
     });
 
     // popAlert();
