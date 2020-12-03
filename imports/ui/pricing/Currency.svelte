@@ -6,6 +6,7 @@
   let promise = getCurrentPrice(symbol);
 
   setInterval(async () => {
+    // promise swapping
     const promise2 = await getCurrentPrice(symbol);
     promise = promise2;
   }, THIRTY_SECONDS);
