@@ -6,9 +6,6 @@ export function getCurrentPrice(symbol) {
                 `https://api.coinbase.com/v2/prices/spot?currency=USD`
         )
                 .then(res => res.json())
-                .then(data => {
-                        console.log(data);
-                        return data;
-                })
+                .then(data => data)
                 .catch(err => err);
 }

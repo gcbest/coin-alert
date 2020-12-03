@@ -6,6 +6,8 @@
   import { LoginWindow, Logout } from 'meteor/levelup:svelte-accounts-ui';
   import AlertOrders from './orders/AlertOrders.svelte';
   import CurrentPrices from './pricing/CurrentPrices.svelte';
+  import { btcPrice } from '../utils/stores';
+
   let email = '';
   let amount = 0;
   let userOrders = [];
@@ -20,6 +22,7 @@
       email: $user.emails[0].address,
       userId: $userId,
       amount,
+      btcPrice: $btcPrice,
       createdAt: new Date(),
       uuid: uuidv4(),
     });

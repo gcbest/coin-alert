@@ -1,13 +1,23 @@
 <script>
   import { getCurrentPrice } from '../../utils';
+  import { btcPrice } from '../../utils/stores';
+
   export let symbol;
   const THIRTY_SECONDS = 30_000;
-
-  let promise = getCurrentPrice(symbol);
+  let promise;
+  (async function getInitialPrice() {
+    promise = await getCurrentPrice(symbol);
+    if (promise && promise.data && promise.data.amount) {
+      $btcPrice = parseFloat(promise.data.amount).toFixed(2);
+    }
+  })();
 
   setInterval(async () => {
     // promise swapping
     const promise2 = await getCurrentPrice(symbol);
+    if (promise2 && promise2.data && promise2.data.amount) {
+      $btcPrice = parseFloat(promise.data.amount).toFixed(2);
+    }
     promise = promise2;
   }, THIRTY_SECONDS);
 </script>
@@ -23,7 +33,7 @@
     Getting current price...
   {:then response}
     <!-- {#if data && data['Realtime Currency Exchange Rate']} -->
-    {#if response.data && response.data.amount}
+    {#if response && response.data && response.data.amount}
       <!-- {symbol}: ${parseFloat(data['Realtime Currency Exchange Rate']['5. Exchange Rate']).toFixed(2)} -->
       {symbol}: ${parseFloat(response.data.amount).toFixed(2)}
     {:else}{symbol}: Price Not Found{/if}
