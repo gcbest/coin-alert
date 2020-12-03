@@ -4,6 +4,8 @@
 
   export let symbol;
   const THIRTY_SECONDS = 30_000;
+  // would've been cleaner w/o using await syntax in template,
+  // but I wanted to work with it
   let promise;
   (async function getInitialPrice() {
     promise = await getCurrentPrice(symbol);
@@ -26,6 +28,10 @@
   h3 {
     text-align: center;
   }
+
+  .symbol {
+    color: #e2c217;
+  }
 </style>
 
 <h3>
@@ -35,7 +41,7 @@
     <!-- {#if data && data['Realtime Currency Exchange Rate']} -->
     {#if response && response.data && response.data.amount}
       <!-- {symbol}: ${parseFloat(data['Realtime Currency Exchange Rate']['5. Exchange Rate']).toFixed(2)} -->
-      {symbol}: ${parseFloat(response.data.amount).toFixed(2)}
+      <span class:symbol>{symbol}</span>: ${parseFloat(response.data.amount).toFixed(2)}
     {:else}{symbol}: Price Not Found{/if}
   {:catch error}
     <p style="color: red">{error.message}</p>
