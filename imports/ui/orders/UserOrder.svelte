@@ -1,12 +1,23 @@
 <script>
   export let order;
-  var options = {
-    // weekday: 'long',
+  const dateOptions = {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
   };
-  const formattedDate = order.createdAt.toLocaleDateString('en-US', options);
+
+  const timeOptions = {
+    timeZoneName: 'short',
+  };
+
+  const formattedDate = order.createdAt.toLocaleDateString(
+    'en-US',
+    dateOptions
+  );
+  const formattedTime = order.createdAt.toLocaleTimeString(
+    'en-US',
+    timeOptions
+  );
 </script>
 
-<li>${order.amount} | {formattedDate}</li>
+<li>${order.amount} | {formattedDate} | {formattedTime}</li>
