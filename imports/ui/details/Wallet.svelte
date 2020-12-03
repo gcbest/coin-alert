@@ -2,18 +2,9 @@
   import { useTracker } from 'meteor/rdb:svelte-meteor-data';
   import { Orders } from '../../api/orders';
   import { Card, CardBody, CardHeader, CardTitle } from 'sveltestrap';
-  import { onMount } from 'svelte';
   export let userId;
 
   $: userOrders = useTracker(() => Orders.find({ userId }).fetch());
-  // Orders.aggregate(
-  //   { $match: { userId } },
-  //   { $group: { _id: null, sum: { $sum: '$btcAmount' } } }
-  // ).fetch()
-
-  onMount(() => {
-    console.log($userOrders);
-  });
 </script>
 
 <Card class="mb-3" color="dark" inverse>
