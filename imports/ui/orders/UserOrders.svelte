@@ -8,7 +8,6 @@
 </script>
 
 <main>
-  <h2>Your Order History</h2>
   {#if $userOrders.length > 0}
     {#each $userOrders as order (order.uuid)}
       <UserOrder {order} />

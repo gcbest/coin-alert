@@ -11,6 +11,6 @@
 
 <Alert color="info" isOpen={visible} toggle={() => (visible = false)}>
   {order.email}
-  | ${order.amount}
+  | ${order.dollarAmount}
   <!-- <button on:click={deleteOrder}>Delete</button> -->
 </Alert>

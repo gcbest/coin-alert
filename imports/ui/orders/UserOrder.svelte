@@ -20,4 +20,4 @@
   );
 </script>
 
-<li>${order.amount} | {formattedDate} | {formattedTime}</li>
+<li>${order.dollarAmount} | {formattedDate} | {formattedTime}</li>
