@@ -23,9 +23,7 @@
 
 {#if $userId}
   <Container>
-    <header>
-      <NavBar />
-    </header>
+    <NavBar />
     <Row>
       <Col>
         <CurrentPrices />
