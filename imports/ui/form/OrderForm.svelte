@@ -35,6 +35,7 @@
   input.order-amount {
     display: inline;
     width: auto;
+    margin: 10px;
   }
 </style>
 

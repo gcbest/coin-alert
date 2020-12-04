@@ -7,6 +7,12 @@
   $: userOrders = useTracker(() => Orders.find({ userId }).fetch());
 </script>
 
+<style>
+  .coin {
+    margin: 10px 0;
+  }
+</style>
+
 <Card class="mb-3" color="dark" inverse>
   <CardHeader>
     <CardTitle>
@@ -15,11 +21,15 @@
   </CardHeader>
 
   <CardBody>
-    BTC Owned:
-    {#if $userOrders}
-      {$userOrders
-        .reduce((acc, curr) => acc + curr.btcAmount, 0)
-        .toPrecision(4)}
-    {/if}
+    <div class="coin">
+      BTC Owned:
+      {#if $userOrders}
+        {$userOrders
+          .reduce((acc, curr) => acc + curr.btcAmount, 0)
+          .toPrecision(4)}
+      {/if}
+    </div>
+    <div class="coin">ETH Owned: Coming soon</div>
+    <div class="coin">XRP Owned: Coming soon</div>
   </CardBody>
 </Card>

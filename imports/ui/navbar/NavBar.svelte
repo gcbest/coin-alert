@@ -28,17 +28,20 @@
   }
 </style>
 
-<Navbar color="dark" light expand="md">
-  <NavbarBrand href="/">
-    <h1>coin counter</h1>
-  </NavbarBrand>
-  <Nav class="ml-auto" navbar>
-    <button
-      class="btn btn-danger"
-      on:click={() => {
-        Meteor.logout();
-      }}>
-      Logout
-    </button>
-  </Nav>
-</Navbar>
+<header>
+  <Navbar color="dark" light expand="md">
+    <NavbarBrand href="/">
+      <h1>coin counter</h1>
+    </NavbarBrand>
+    <Nav class="ml-auto" navbar>
+      <button
+        class="btn btn-danger"
+        on:click={() => {
+          Meteor.logout();
+          alert('hmm someone should fix this...');
+        }}>
+        Logout
+      </button>
+    </Nav>
+  </Navbar>
+</header>

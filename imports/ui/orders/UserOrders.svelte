@@ -12,5 +12,5 @@
     {#each $userOrders as order (order.uuid)}
       <UserOrder {order} />
     {/each}
-  {/if}
+  {:else}No orders yet. (What are you waiting on?){/if}
 </main>
