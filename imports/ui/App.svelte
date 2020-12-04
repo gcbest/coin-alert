@@ -1,5 +1,5 @@
 <script>
-  import { Col, Container, Row } from 'sveltestrap';
+  import { Col, Container, Row, Button } from 'sveltestrap';
   import { v4 as uuidv4 } from 'uuid';
   import { useTracker } from 'meteor/rdb:svelte-meteor-data';
   import { Orders } from '../api/orders';
@@ -56,6 +56,16 @@
     text-align: center;
   }
 
+  .order-form {
+    width: fit-content;
+    margin: auto;
+  }
+
+  input.order-amount {
+    display: inline;
+    width: auto;
+  }
+
   .login-window {
     color: green;
   }
@@ -72,9 +82,10 @@
   <h1>coin counter</h1>
   <CurrentPrices />
 
-  <form on:submit|preventDefault={handleSubmit}>
+  <form on:submit|preventDefault={handleSubmit} class="order-form">
     <label>$
       <input
+        class="form-control order-amount"
         type="number"
         bind:value={dollarAmount}
         placeholder="0.00"
@@ -86,7 +97,7 @@
         pattern="^\d+(?:\.\d{(1, 2)})?$" />
     </label>
 
-    <button type="submit">Order</button>
+    <Button color="warning" type="submit">Order</Button>
   </form>
 </header>
 
