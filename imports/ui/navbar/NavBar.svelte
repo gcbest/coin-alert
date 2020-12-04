@@ -1,5 +1,6 @@
 <script>
-  import { Logout } from 'meteor/levelup:svelte-accounts-ui';
+  import { Meteor } from 'meteor/meteor';
+  //   import { Logout } from 'meteor/levelup:svelte-accounts-ui';
   import { Navbar, NavbarBrand, Nav } from 'sveltestrap';
 </script>
 
@@ -32,6 +33,12 @@
     <h1>coin counter</h1>
   </NavbarBrand>
   <Nav class="ml-auto" navbar>
-    <Logout />
+    <button
+      class="btn btn-danger"
+      on:click={() => {
+        Meteor.logout();
+      }}>
+      Logout
+    </button>
   </Nav>
 </Navbar>
