@@ -1,5 +1,5 @@
 <script>
-  import { Col, Container, Row } from 'sveltestrap';
+  import { Col, Container, Row, Card } from 'sveltestrap';
   import { useTracker } from 'meteor/rdb:svelte-meteor-data';
   import { LoginWindow } from 'meteor/levelup:svelte-accounts-ui';
   import AlertOrders from './orders/AlertOrders.svelte';
@@ -8,6 +8,7 @@
   import Wallet from './details/Wallet.svelte';
   import OrderForm from './form/OrderForm.svelte';
   import NavBar from './navbar/NavBar.svelte';
+  import Brand from './navbar/Brand.svelte';
 
   // when order added to database this will fetch all of them from DB
   $: user = useTracker(() => Meteor.user());
@@ -17,13 +18,15 @@
 
 <style>
   .login-window {
-    color: green;
+    color: red;
+    text-align: center;
+    font-weight: 700px;
   }
 </style>
 
 {#if $userId}
+  <NavBar />
   <Container>
-    <NavBar />
     <Row>
       <Col>
         <CurrentPrices />
@@ -43,6 +46,7 @@
   <AlertOrders userId={$userId} />
 {:else}
   <div class="login-window">
+    <Brand />
     <LoginWindow />
   </div>
 {/if}
